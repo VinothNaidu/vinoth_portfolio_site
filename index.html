@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinoth Naidu — Data Science Undergraduate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #020609;
+      --bg2: #04080f;
+      --surface: #060c18;
+      --card: #080f1e;
+      --border: #0d1f35;
+      --border2: #153050;
+      --neon: #00f5c4;
+      --neon-d: rgba(0,245,196,.1);
+      --purple: #9d6eff;
+      --yellow: #ffd54f;
+      --text: #c8dff0;
+      --sub: #4a7090;
+      --muted: #2a4560;
+      --sans: 'Sora', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+    nav { 
+      position:fixed; top:0; left:0; right:0; z-index:500; 
+      padding:.85rem 4rem; display:flex; justify-content:space-between; align-items:center; 
+      background:rgba(2,6,9,.88); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); 
+    }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; }
+    .nav-links a { 
+      font-family:var(--mono); font-size:.56rem; letter-spacing:.12em; text-transform:uppercase; 
+      color:var(--sub); text-decoration:none; transition:color .2s; 
+    }
+    .nav-links a:hover, .nav-links a.active { color:var(--neon); }
+
+    .nav-open { 
+      font-family:var(--mono); font-size:.52rem; letter-spacing:.1em; 
+      color:var(--neon); border:1px solid var(--neon); padding:.28rem .75rem; background:var(--neon-d); 
+    }
+
+    .hero { 
+      min-height:100vh; padding:9rem 4rem 5rem; 
+      display:grid; grid-template-columns:1fr 380px; gap:5rem; align-items:center; 
+    }
+    h1 { 
+      font-size:clamp(2.8rem,6.5vw,5.2rem); font-weight:800; line-height:.93; 
+      letter-spacing:-.035em; margin-bottom:1.2rem; 
+    }
+    .tagline { 
+      font-family:var(--mono); font-size:.72rem; color:var(--purple); 
+      letter-spacing:.06em; margin-bottom:1rem; 
+    }
+    .avail { 
+      font-family:var(--mono); font-size:.62rem; color:var(--sub); 
+      letter-spacing:.06em; margin-bottom:2.2rem; 
+    }
+    .avail strong { color:var(--yellow); }
+    
+    /* Improved bio spacing */
+    .bio { 
+      font-size:.98rem; 
+      color:var(--sub); 
+      line-height:1.95; 
+      max-width:520px; 
+      margin-bottom:2.5rem; 
+      padding-right: 20px;
+    }
+
+    .btns { display:flex; gap:.9rem; flex-wrap:wrap; }
+    .btn { 
+      font-family:var(--mono); font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; 
+      padding:.78rem 1.7rem; text-decoration:none; border:1px solid var(--neon); color:var(--neon); 
+      background:transparent; transition:all .25s; cursor: pointer;
+    }
+    .btn:hover { background:var(--neon); color:var(--bg); }
+
+    section { padding:6rem 4rem; scroll-margin-top: 100px; }
+    .sh { display:flex; align-items:center; gap:1.2rem; margin-bottom:3.5rem; }
+    .sn { font-family:var(--mono); font-size:.5rem; color:var(--neon); letter-spacing:.2em; }
+    .st { font-size:clamp(1.4rem,3vw,2rem); font-weight:700; letter-spacing:-.02em; }
+
+    .edu-card {
+      background:var(--card); border:1px solid var(--border2); padding:2.5rem;
+      display:grid; grid-template-columns:160px 1fr; gap:3rem;
+    }
+    .edu-yr { font-family:var(--mono); font-size:1.2rem; font-weight:500; color:var(--neon); }
+    .cgpa { 
+      display:inline-flex; align-items:center; gap:.4rem; margin-top:.8rem;
+      font-family:var(--mono); font-size:.58rem; color:var(--yellow);
+      border:1px solid rgba(255,213,79,.25); padding:.25rem .65rem; background:rgba(255,213,79,.04);
+    }
+    .edu-degree { font-size:1.25rem; font-weight:700; margin-bottom:.3rem; }
+    .edu-uni { font-family:var(--mono); font-size:.62rem; color:var(--sub); margin-bottom:1rem; }
+
+    .xp-item { 
+      display:grid; grid-template-columns:190px 1fr; gap:3rem; 
+      padding:2.8rem 0; border-bottom:1px solid var(--border); 
+    }
+    .xp-date { font-family:var(--mono); font-size:.56rem; color:var(--neon); letter-spacing:.07em; margin-bottom:.35rem; }
+    .xp-role { font-size:1.18rem; font-weight:700; margin-bottom:.7rem; letter-spacing:-.01em; }
+    .xp-bullets { list-style:none; }
+    .xp-bullets li { 
+      font-family:var(--mono); font-size:.63rem; color:var(--sub); 
+      padding-left:1.1rem; line-height:2.1; position:relative; 
+    }
+    .xp-bullets li::before { content:'▹'; position:absolute; left:0; color:var(--neon); }
+
+    .pj { 
+      background:var(--card); padding:2.2rem; border:1px solid var(--border2); 
+      margin-bottom:1.8rem; 
+    }
+    .pj-title { font-size:1.1rem; font-weight:700; margin-bottom:.6rem; }
+    .pj-desc { font-size:.82rem; color:var(--sub); line-height:1.85; margin-bottom:1.3rem; }
+    .pl { 
+      color:var(--sub); text-decoration:none; font-family:var(--mono); 
+      font-size:.54rem; letter-spacing:.1em; 
+    }
+    .pl:hover { color:var(--neon); }
+
+    .ach-item { 
+      display:grid; grid-template-columns:60px 1fr auto; gap:2rem; 
+      align-items:center; padding:1.6rem 0; border-bottom:1px solid var(--border); 
+    }
+    .ach-n { font-family:var(--mono); font-size:1.8rem; color:var(--border2); }
+    .ach-title { font-size:.95rem; font-weight:600; }
+    .ach-org { font-family:var(--mono); font-size:.56rem; color:var(--sub); }
+
+    @media(max-width:960px){
+      .hero{grid-template-columns:1fr; gap:3rem;}
+      .edu-card, .xp-item{grid-template-columns:1fr; gap:1.5rem;}
+      nav { padding:.85rem 1.5rem; }
+      .nav-links { gap:1.5rem; font-size:.52rem; }
+      .bio { padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-links">
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#ach" class="nav-link">Achievements</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-open"><span style="color:#ffd54f;">●</span> Seeking Internship</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div>
+    <p class="tagline">Final-Year Computer Science (Data Science)</p>
+    <h1>Vinoth Naidu</h1>
+    <p class="avail">Available for 3-month internship: <strong>27 July – 25 October 2026</strong></p>
+    
+    <!-- Improved spacing bio -->
+    <p class="bio">
+      Final-year Computer Science (Data Science) undergraduate at Multimedia University, Cyberjaya.<br><br>
+      
+      Seeking a 3-month internship in software development, data science, or cybersecurity.<br><br>
+      
+      Experienced in full-stack development, IoT systems, and AI-integrated applications. 
+      Adaptable, fast learner, and eager to contribute meaningfully in a professional setting.
+    </p>
+
+    <div class="btns">
+      <a href="#projects" class="btn">View Projects</a>
+      <a href="#contact" class="btn" style="border-color:#4a7090; color:#4a7090;">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2 class="st">Education</h2>
+  </div>
+  <div class="edu-card">
+    <div>
+      <div class="edu-yr">2025 – PRESENT</div>
+      <div class="cgpa">⭐ CGPA 3.25 / 4.00</div>
+    </div>
+    <div>
+      <div class="edu-degree">Bachelor of Computer Science (Hons) in Data Science</div>
+      <div class="edu-uni">MULTIMEDIA UNIVERSITY · CYBERJAYA, SELANGOR</div>
+      <p style="color:var(--sub); line-height:1.75;">
+        Final year · Expected graduation 2027
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg2);">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2 class="st">Experience</h2>
+  </div>
+
+  <div class="xp-item">
+    <div>
+      <div class="xp-date">Oct 2025 – Present</div>
+      <div style="font-weight:700;">P3 Platform</div>
+      <div style="font-family:var(--mono); font-size:.55rem; color:var(--sub);">Part-Time • Malaysia</div>
+    </div>
+    <div>
+      <div class="xp-role">Coach (Robotics & Coding)</div>
+      <ul class="xp-bullets">
+        <li>Coached students from kindergarten to secondary level in Scratch, Python, and robotics.</li>
+        <li>Guided hands-on projects involving sensors, motors, and simple automation.</li>
+        <li>Provided real-time assistance in coding, debugging, and robot assembly while following the textbook curriculum.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="xp-item">
+    <div>
+      <div class="xp-date">July 2024 – Oct 2024</div>
+      <div style="font-weight:700;">Coreplus Solutions Sdn. Bhd.</div>
+      <div style="font-family:var(--mono); font-size:.55rem; color:var(--sub);">Puchong, Selangor • Full-Time Internship</div>
+    </div>
+    <div>
+      <div class="xp-role">IT Operations Intern</div>
+      <ul class="xp-bullets">
+        <li>Redesigned client company’s Intranet and SharePoint features to improve navigation, accessibility, and collaboration for 40+ staff members.</li>
+        <li>Assisted with structured cabling, server rack installations, and network setup during site visits.</li>
+        <li>Conducted a site survey at a durian plantation to test Starlink satellite Internet, evaluate network coverage, and identify optimal relay points for Wi-Fi connectivity.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sh">
+    <span class="sn">03</span>
+    <h2 class="st">Projects</h2>
+  </div>
+
+  <div class="pj">
+    <div style="color:var(--neon); font-family:var(--mono); font-size:.55rem; margin-bottom:1rem;">FINAL YEAR PROJECT (In Progress)</div>
+    <div class="pj-title">IoT Fire Detection System</div>
+    <p class="pj-desc">
+      Developing a low-cost IoT prototype using ESP32 microcontroller with MQ-2 smoke, DHT22 temperature/humidity, 
+      and flame sensors for real-time environmental data collection via MQTT over WiFi. 
+      Building an interactive Streamlit dashboard displaying live sensor readings, ML classification results, 
+      EDA visualisations, and fire risk alerts.
+    </p>
+    <a href="https://github.com/VinothNaidu/FYP-IoT-Fire" target="_blank" class="pl">→ github.com/VinothNaidu/FYP-IoT-Fire</a>
+  </div>
+
+  <div class="pj">
+    <div style="color:var(--purple); font-family:var(--mono); font-size:.55rem; margin-bottom:1rem;">AI • COMPUTER VISION</div>
+    <div class="pj-title">Face Liveness & Identity Verification System</div>
+    <p class="pj-desc">
+      Built a two-stage identity verification system using a MobileNetV2 anti-spoofing CNN trained on real/spoof face datasets, 
+      achieving real-time liveness detection with INT8-level efficiency. 
+      Integrated a Tesseract OCR pipeline with Gemini API-powered field validation to extract and verify Malaysian IC fields. 
+      Served via a FastAPI backend with a React dashboard and Dockerised deployment.
+    </p>
+    <a href="https://github.com/VinothNaidu/Face-Liveness-System" target="_blank" class="pl">→ github.com/VinothNaidu/Face-Liveness-System</a>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="ach" style="background:var(--bg2);">
+  <div class="sh">
+    <span class="sn">04</span>
+    <h2 class="st">Achievements</h2>
+  </div>
+
+  <div class="ach-item">
+    <div class="ach-n">01</div>
+    <div>
+      <div class="ach-title">Deriv AI Hackathon 2026 (100+ teams)</div>
+      <div class="ach-org">Deriv • Top 42 Semi-Finalists</div>
+    </div>
+    <div style="font-family:var(--mono); font-size:.55rem; color:var(--yellow);">Feb 2026</div>
+  </div>
+
+  <div class="ach-item">
+    <div class="ach-n">02</div>
+    <div>
+      <div class="ach-title">Project 2030: MyAI Future Hackathon</div>
+      <div class="ach-org">GDGoC UTM</div>
+    </div>
+    <div style="font-family:var(--mono); font-size:.55rem; color:var(--sub);">Mar 2026</div>
+  </div>
+
+  <div class="ach-item">
+    <div class="ach-n">03</div>
+    <div>
+      <div class="ach-title">Build with AI: Gemini Hackathon</div>
+      <div class="ach-org">Google DeepMind</div>
+    </div>
+    <div style="font-family:var(--mono); font-size:.55rem; color:var(--sub);">Mar 2026</div>
+  </div>
+
+  <div class="ach-item">
+    <div class="ach-n">04</div>
+    <div>
+      <div class="ach-title">Huawei Malaysia Sales Elite Challenge 2023</div>
+      <div class="ach-org">Huawei • Preliminary Round Qualifier</div>
+    </div>
+    <div style="font-family:var(--mono); font-size:.55rem; color:var(--sub);">Apr 2023</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="text-align:center; padding:8rem 4rem;">
+  <h2 style="font-size:3.2rem; margin-bottom:1.5rem;">Let's Connect</h2>
+  <p style="max-width:460px; margin:0 auto 2.5rem; color:var(--sub);">
+    Seeking a 3-month internship from <strong>27 July to 25 October 2026</strong> in Data Science, Software Development, or Cybersecurity.
+  </p>
+  <a href="mailto:vinothnaidu155@gmail.com" style="color:var(--neon); font-size:1.1rem; text-decoration:none; font-family:var(--mono);">
+    vinothnaidu155@gmail.com
+  </a>
+  <div style="margin-top:3rem; display:flex; justify-content:center; gap:1.8rem; flex-wrap:wrap;">
+    <a href="https://github.com/VinothNaidu" target="_blank" style="color:var(--sub); text-decoration:none; font-family:var(--mono);">GitHub</a>
+    <a href="https://www.linkedin.com/in/vinoth-naidu-18b3a9211/" target="_blank" style="color:var(--sub); text-decoration:none; font-family:var(--mono);">LinkedIn</a>
+    <a href="tel:+601131386772" style="color:var(--sub); text-decoration:none; font-family:var(--mono);">+60 11-3138 6772</a>
+  </div>
+</section>
+
+<footer style="text-align:center; padding:2rem; font-family:var(--mono); font-size:.55rem; color:var(--sub); border-top:1px solid var(--border);">
+  © 2026 Vinoth Naidu • Cyberjaya, Selangor, Malaysia
+</footer>
+
+<script>
+  // Active nav link highlighting
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  function updateActiveLink() {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (scrollY >= sectionTop - 150) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  updateActiveLink();
+
+  // Smooth scroll for hero buttons
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (this.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
