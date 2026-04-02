@@ -63,14 +63,12 @@
     }
     .avail strong { color:var(--yellow); }
     
-    /* Improved bio spacing */
     .bio { 
       font-size:.98rem; 
       color:var(--sub); 
       line-height:1.95; 
       max-width:520px; 
       margin-bottom:2.5rem; 
-      padding-right: 20px;
     }
 
     .btns { display:flex; gap:.9rem; flex-wrap:wrap; }
@@ -80,6 +78,53 @@
       background:transparent; transition:all .25s; cursor: pointer;
     }
     .btn:hover { background:var(--neon); color:var(--bg); }
+
+    /* TikTok Card */
+    .tiktok-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      padding: 2rem 1.8rem;
+      border-radius: 12px;
+      height: fit-content;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .tiktok-card:hover {
+      border-color: #ff0050;
+      transform: translateY(-6px);
+    }
+    .tiktok-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    .tiktok-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+    .tiktok-card p {
+      color: var(--sub);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+      font-size: 0.93rem;
+    }
+    .tiktok-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #000;
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .tiktok-btn:hover {
+      background: #ff0050;
+      transform: scale(1.05);
+    }
 
     section { padding:6rem 4rem; scroll-margin-top: 100px; }
     .sh { display:flex; align-items:center; gap:1.2rem; margin-bottom:3.5rem; }
@@ -137,7 +182,6 @@
       .edu-card, .xp-item{grid-template-columns:1fr; gap:1.5rem;}
       nav { padding:.85rem 1.5rem; }
       .nav-links { gap:1.5rem; font-size:.52rem; }
-      .bio { padding-right: 0; }
     }
   </style>
 </head>
@@ -161,7 +205,6 @@
     <h1>Vinoth Naidu</h1>
     <p class="avail">Available for 3-month internship: <strong>27 July – 25 October 2026</strong></p>
     
-    <!-- Improved spacing bio -->
     <p class="bio">
       Final-year Computer Science (Data Science) undergraduate at Multimedia University, Cyberjaya.<br><br>
       
@@ -174,6 +217,20 @@
     <div class="btns">
       <a href="#projects" class="btn">View Projects</a>
       <a href="#contact" class="btn" style="border-color:#4a7090; color:#4a7090;">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- TikTok Card in Profile Snapshot Position -->
+  <div>
+    <div class="tiktok-card">
+      <div class="tiktok-icon">📱</div>
+      <h3>Watch My Part-Time Job Journey</h3>
+      <p>
+        Ratings and reviews about my past part-time jobs and check out my other videos on my TikTok channel.
+      </p>
+      <a href="https://vt.tiktok.com/ZSHr8vr8K/" target="_blank" class="tiktok-btn">
+        👀 Watch on TikTok
+      </a>
     </div>
   </div>
 </section>
@@ -342,7 +399,6 @@
 
   function updateActiveLink() {
     let current = '';
-    
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       if (scrollY >= sectionTop - 150) {
@@ -361,7 +417,7 @@
   window.addEventListener('scroll', updateActiveLink);
   updateActiveLink();
 
-  // Smooth scroll for hero buttons
+  // Smooth scroll for buttons
   document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
       if (this.getAttribute('href').startsWith('#')) {
